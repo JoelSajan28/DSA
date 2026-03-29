@@ -1,124 +1,149 @@
-"""
-Python: Mutable vs Immutable — Summary Notes
-1️⃣ Core Rule
+# Python: Mutable vs Immutable — Summary Notes
 
-Everything in Python is an object
+---
 
-Variables store references to objects
+# 1️⃣ Core Rule
 
-Assignment does NOT copy objects
+- Everything in Python is an **object**
+- Variables store **references to objects**
+- Assignment **does NOT copy objects**
+- Mutation **changes the object**
+- Reassignment **changes the reference**
 
-Mutation changes the object
+---
 
-Reassignment changes the reference
+# 2️⃣ Immutable Types
 
-2️⃣ Immutable Types
+**Immutable = cannot change after creation**
 
-Immutable = cannot change after creation
+When modified, Python **creates a new object**.
 
-When modified, Python creates a new object.
+### Common Immutable Types
 
-Common Immutable Types
+- `int`
+- `float`
+- `bool`
+- `str`
+- `tuple`
+- `frozenset`
 
-int
+### Example
 
-float
-
-bool
-
-str
-
-tuple
-
-frozenset
-
-Example
+```python
 a = 5
 b = a
 a = 10
+```
 
-5 object unchanged
+Result:
 
-a now points to new object 10
+- `5` object unchanged
+- `a` now points to new object `10`
+- `b` still points to `5`
 
-b still points to 5
+### Key Properties
 
-Key Property
+- Safe to share between variables
+- No side effects
+- Usually **hashable** → can be dictionary keys
 
-Safe to share between variables
+---
 
-No side effects
+# 3️⃣ Mutable Types
 
-Hashable (usually) → can be dictionary keys
+**Mutable = can change in place**
 
-3️⃣ Mutable Types
+### Common Mutable Types
 
-Mutable = can change in place
+- `list`
+- `dict`
+- `set`
+- most class instances
 
-Common Mutable Types
+### Example
 
-list
-
-dict
-
-set
-
-most class instances
-
-Example
+```python
 A = [1, 2, 3]
 B = A
 A.append(4)
+```
 
-Both A and B now reference [1,2,3,4].
+Result:
 
-Key Property
+```
+A → [1,2,3,4]
+B → [1,2,3,4]
+```
 
-Changes affect all references
+Both variables reference the **same object**.
 
-Not hashable (cannot be dictionary keys)
+### Key Properties
 
-4️⃣ Assignment Behavior
+- Changes affect all references
+- Not hashable (cannot be dictionary keys)
+
+---
+
+# 4️⃣ Assignment Behavior
+
+```python
 x = something
+```
 
 This:
 
-Does NOT copy
+- **Does NOT copy the object**
+- Just **binds the name to the object**
 
-Just binds name to object
+---
 
-5️⃣ Copying
-Shallow Copy
+# 5️⃣ Copying
+
+## Shallow Copy
+
+```python
 new_list = old_list.copy()
+```
 
-Copies outer container only.
+Copies **only the outer container**.
 
-Deep Copy
+---
+
+## Deep Copy
+
+```python
 import copy
+
 new_list = copy.deepcopy(old_list)
+```
 
-Copies everything recursively.
+Copies **everything recursively**.
 
-6️⃣ Quick Comparison Table
-Feature	Immutable	Mutable
-Can change in place?	❌ No	✅ Yes
-New object on change?	✅ Yes	❌ No
-Safe to share?	✅ Yes	⚠️ Careful
-Hashable?	Usually yes	No
-Examples	int, str, tuple	list, dict, set
-7️⃣ Mental Model
+---
 
-Immutable → Frozen object
+# 6️⃣ Quick Comparison Table
 
-Mutable → Editable object
+| Feature | Immutable | Mutable |
+|--------|-----------|---------|
+| Can change in place? | ❌ No | ✅ Yes |
+| New object on change? | ✅ Yes | ❌ No |
+| Safe to share? | ✅ Yes | ⚠️ Careful |
+| Hashable? | Usually yes | No |
+| Examples | `int`, `str`, `tuple` | `list`, `dict`, `set` |
 
-Variable → Label pointing to object
+---
 
-8️⃣ Interview Insight
+# 7️⃣ Mental Model
+
+- **Immutable → Frozen object**
+- **Mutable → Editable object**
+- **Variable → Label pointing to object**
+
+---
+
+# 8️⃣ Interview Insight
 
 Most bugs in Python happen because:
 
-People assume assignment copies mutable objects
-
-People forget lists/dicts are shared references
-"""
+- Developers assume **assignment copies mutable objects**
+- Developers forget **lists/dicts are shared references**
